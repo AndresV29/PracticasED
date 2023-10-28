@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
-#include "Ejer1.h"
+//#include "Ejer1.h"
 using namespace std;
 
 struct Nodo{
