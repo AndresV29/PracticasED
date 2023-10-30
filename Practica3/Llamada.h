@@ -17,13 +17,13 @@ private:
 public:
     Llamada();
 
-    Llamada(int numero, const string &nombre, const string &estado);
+    Llamada(int numero, const string &nombre);
     int getNumero() const;
     void setNumero(int numero);
     const string &getNombre() const;
     void setNombre(const string &nombre);
-    const string &getEstado() const;
-    void setEstado(const string &estado);
+    // const string &getEstado() const;
+    // void setEstado(const string &estado);
 
     friend ostream &operator<<(ostream &os, const Llamada &llamada);
 };

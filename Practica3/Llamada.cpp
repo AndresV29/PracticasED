@@ -5,8 +5,8 @@
 #include <stack>
 #include "Llamada.h"
 
-Llamada::Llamada(int numero, const string &nombre, const string &estado) : numero(numero), nombre(nombre),
-                                                                           estado(estado) {}
+Llamada::Llamada(int numero, const string &nombre) : numero(numero), nombre(nombre)
+                                                                            {}
 
 int Llamada::getNumero() const {
     return numero;
@@ -24,17 +24,17 @@ void Llamada::setNombre(const string &nombre) {
     Llamada::nombre = nombre;
 }
 
-const string &Llamada::getEstado() const {
-    return estado;
-}
+// const string &Llamada::getEstado() const {
+//     return estado;
+// }
 
-void Llamada::setEstado(const string &estado) {
-    Llamada::estado = estado;
-}
+// void Llamada::setEstado(const string &estado) {
+//     Llamada::estado = estado;
+// }
 
 Llamada::Llamada() {}
 
 ostream &operator<<(ostream &os, const Llamada &llamada) {
-    os << "numero: " << llamada.numero << " nombre: " << llamada.nombre << " estado: " << llamada.estado;
+    os << "numero: " << llamada.numero << " nombre: " << llamada.nombre << endl;
     return os;
 }
