@@ -33,7 +33,7 @@ Auto eliminaUltimo(){
     return temp;
 }
 void mostrarAutos(){
-    stringstream ss;
+    
     stack<Auto> temp;
     Auto valorPivote;
     int tam = estacionamiento.size();
