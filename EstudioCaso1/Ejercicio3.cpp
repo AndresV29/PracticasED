@@ -1,8 +1,7 @@
 //
 // Created by andre on 10/28/2023.
-//Estacionamiento
+//Estacionamiento con pila
 
-#include "Ejer3.h"
 #include <iostream>
 #include <stack>
 #include <limits>
@@ -10,28 +9,45 @@
 using namespace std;
 struct Auto {
     string modelo, placa;
+    int pos;
 };
 stack<Auto> estacionamiento;
 
 void agregaAuto(Auto nuevo){
-    estacionamiento.push(nuevo);
-    return;
+    if (estacionamiento.size() == 5){
+        cout << "El estacionamiento se encuentra en su capacidad maxima, no es posible agregar otro auto.";
+    }else {
+        estacionamiento.push(nuevo);
+        cout << "El auto ha ingresado al estacionamiento"<< endl;
+    }
+
 }
 
 void eliminaAuto(){
+    cout << "Un auto se ha retirado del Estacionamiento";
     estacionamiento.pop();
-    cout << "Se ha eliminado un Auto del Estacionamiento" << endl;
-    return;
 }
-stringstream mostrarAutos(){
+Auto eliminaUltimo(){
+    Auto temp = estacionamiento.top();
+    estacionamiento.pop();
+    return temp;
+}
+void mostrarAutos(){
     stringstream ss;
     stack<Auto> temp;
     Auto valorPivote;
     int tam = estacionamiento.size();
-    cout << "Autos Estacionados"<< endl;
+    cout << "Autos Estacionados: "<< tam << endl;
+    if (tam == 5){
+        cout << "\n El estacionamiento esta en capacidad maxima." << endl;
+    }else if (tam < 5)  {
+        cout << "\n El estacionamiento no se encuentra en su maxima capacidad. " << endl;
+    }else if (estacionamiento.empty()){
+        cout << "El estacionamiento se encuentra vacio" << endl;
+    }
     for(int i = 0; i < tam; i++){
-        valorPivote =  estacionamiento.top();
-        ss << "Placa: " << valorPivote.placa << " Modelo: "<< valorPivote.modelo << endl;
+        valorPivote =  eliminaUltimo();
+        cout << "Placa: " << valorPivote.placa << " Modelo: "<< valorPivote.modelo << " Posicion:" << valorPivote.pos << endl;
         temp.push(valorPivote);
     }
     tam = temp.size();
@@ -40,7 +56,6 @@ stringstream mostrarAutos(){
         temp.pop();
         estacionamiento.push(valorPivote);
     }
-    return ss;
 }
 
 void menuEst(){
@@ -49,39 +64,34 @@ void menuEst(){
     Auto nuevo;
     do {
         cout << "Estacionamiento" << endl;
-        cout << "1. Agregar Auto" << endl;
+        cout << "1. Registrar Auto" << endl;
         cout << "2. Eliminar Auto" << endl;
-        cout << "3. Mostrar Autos" << endl;
-        cout << "4. Buscar Auto." << endl;
-        cout << "5. Salir." << endl;
+        cout << "3. Mostrar estado del estacionamiento" << endl;
+        cout << "4. Salir." << endl;
         cout << "Seleccione una opcion: ";
         cin >> opcion;
         switch (opcion) {
             case 1:
                 cout << "Ingrese el modelo del auto: ";
-                cin.clear();
-                cin.ignore(1000000);
+                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
                 getline(cin, nuevo.modelo);
                 //cin >> nom;
                 cout << "Ingrese la placa del vehiculo: ";
                 cin >> nuevo.placa;
+                cout << "Ingrese la posicion donde se encuentra el vehiculo(1-5) ";
+                cin >> nuevo.pos;
                 agregaAuto(nuevo);
                 break;
             case 2:
                 eliminaAuto();
                 break;
             case 3:
-                mostrarContactos(inventario);
+                 mostrarAutos();
                 break;
             case 4:
-                cout << "Ingrese el nombre del contacto: ";
-                cin >> nom;
-                buscarContacto(inventario, nom);
-                break;
-            case 5:
                 return;
             default:
-                cout << "Seleccione una opcione valida";
+                cout << "Seleccione una opcion valida";
                 menuEst();
                 break;
         }
@@ -89,6 +99,6 @@ void menuEst(){
 }
 
 int main(){
-    menuEst();
-    return 0;
+   menuEst();
+   return 0;
 }

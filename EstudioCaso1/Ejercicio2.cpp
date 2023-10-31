@@ -1,9 +1,8 @@
 //
 // Created by andre on 10/26/2023.
-// Manejo de contactos con lista simple.
+// Gestor de contactos
 #include <iostream>
 #include <limits>
-
 
 using namespace std;
 struct Node{
@@ -39,7 +38,7 @@ void eliminarContacto(Node* cabeza, string contactoE){
             }
 
             delete actual;
-            cout << "1 contacto ha sido eliminado.";
+            cout << "1 contacto ha sido eliminado."<< endl;
             return;
         }
 
@@ -59,7 +58,7 @@ void mostrarContactos (Node*& head)
     cout << "Contactos: "<< endl;
     while(actual != nullptr)
     {
-        cout << actual->nombreContacto << " - " << actual->numeroTel<< " - " << actual->correoEl << endl;
+        cout << actual->nombreContacto << " Numero:  " << actual->numeroTel<< " Correo: " << actual->correoEl << endl;
 
         actual = actual->sig;
     }
@@ -72,7 +71,7 @@ void buscarContacto(Node* cabeza, string contactoB){
 
         while (current) {
             if (current->nombreContacto == contactoB) {
-                cout << "Contacto " << contactoB << endl;
+                cout << "Contacto fue encontrado " << contactoB << "Numero: " << current->numeroTel <<endl;
                 found = true;
             }
             current = current->sig;
@@ -133,6 +132,6 @@ void menu(){
     }while (true);
 }
 int main(){
-    menu();
-    return 0;
+   menu();
+   return 0;
 }
