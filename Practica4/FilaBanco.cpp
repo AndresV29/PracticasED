@@ -6,34 +6,40 @@
 #include <random>
 
 using namespace std;
-int main() {
-    queue<std::string> myQueue;
+
+void atenderClientes(){
+    queue<string> filaClientes;
     default_random_engine generator;
     uniform_int_distribution<int> distribution(1, 10);
 
-   
-    myQueue.push("cl-1");
-    myQueue.push("cl-2");
-    myQueue.push("cl-3");
-    myQueue.push("cl-4");
-    myQueue.push("cl-5");
 
-    auto start_time = std::chrono::high_resolution_clock::now();  // tiempo de inicio
+    filaClientes.push("cl-1");
+    filaClientes.push("cl-2");
+    filaClientes.push("cl-3");
+    filaClientes.push("cl-4");
+    filaClientes.push("cl-5");
 
-    while (!myQueue.empty()) {
-        // Generar un tiempo de espera al azar, entre 1 a 10 segundos
-        int wait_time = distribution(generator);
-        this_thread::sleep_for(chrono::seconds(wait_time));
+    auto start_time = chrono::high_resolution_clock::now();
 
-        string frontString = myQueue.front();
-        myQueue.pop();
-        cout << "Se atendio: " << frontString << " (Tiempo de espera " << wait_time << " minutos)" << endl;
+    while (!filaClientes.empty()) {
+        // Generar un tiempo de espera al azar, entre 1 a 10 segundos (simulacion)
+        int tiempoEspera = distribution(generator);
+        this_thread::sleep_for(chrono::seconds(tiempoEspera));
+
+        string frontString = filaClientes.front();
+        filaClientes.pop();
+        //Aunque son segundos, imprime "minutos" para simular.
+        cout << "Se atendio: " << frontString << " (Tiempo de espera " << tiempoEspera << " minutos)" << endl;
     }
 
-    auto end_time = chrono::high_resolution_clock::now();  // tiempo final
+    auto end_time = chrono::high_resolution_clock::now();
     chrono::duration<double> execution_time = end_time - start_time;
 
-    cout << "Tiempo total para atender clientes: " << execution_time.count() << " minutos." << std::endl;
+    cout << "Tiempo total para atender clientes: " << execution_time.count() << " minutos." << endl;
+}
 
+int main() {
+    //Inicio del programa.
+    atenderClientes();
     return 0;
 }
