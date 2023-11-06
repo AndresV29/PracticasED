@@ -5,35 +5,35 @@
 #include <thread>
 #include <random>
 
+using namespace std;
 int main() {
-    std::queue<std::string> myQueue;
-    std::default_random_engine generator;
-    std::uniform_int_distribution<int> distribution(1, 10);
+    queue<std::string> myQueue;
+    default_random_engine generator;
+    uniform_int_distribution<int> distribution(1, 10);
 
-    // Add five strings to the queue
-    myQueue.push("String 1");
-    myQueue.push("String 2");
-    myQueue.push("String 3");
-    myQueue.push("String 4");
-    myQueue.push("String 5");
+   
+    myQueue.push("cl-1");
+    myQueue.push("cl-2");
+    myQueue.push("cl-3");
+    myQueue.push("cl-4");
+    myQueue.push("cl-5");
 
-    auto start_time = std::chrono::high_resolution_clock::now();  // Record the start time
+    auto start_time = std::chrono::high_resolution_clock::now();  // tiempo de inicio
 
     while (!myQueue.empty()) {
-        // Generate a random wait time between 1 and 10 seconds
+        // Generar un tiempo de espera al azar, entre 1 a 10 segundos
         int wait_time = distribution(generator);
-        std::this_thread::sleep_for(std::chrono::seconds(wait_time));
+        this_thread::sleep_for(chrono::seconds(wait_time));
 
-        // Pop and print the front string
-        std::string frontString = myQueue.front();
+        string frontString = myQueue.front();
         myQueue.pop();
-        std::cout << "Popped: " << frontString << " (Waited for " << wait_time << " seconds)" << std::endl;
+        cout << "Se atendio: " << frontString << " (Tiempo de espera " << wait_time << " minutos)" << endl;
     }
 
-    auto end_time = std::chrono::high_resolution_clock::now();  // Record the end time
-    std::chrono::duration<double> execution_time = end_time - start_time;
+    auto end_time = chrono::high_resolution_clock::now();  // tiempo final
+    chrono::duration<double> execution_time = end_time - start_time;
 
-    std::cout << "Program executed in " << execution_time.count() << " seconds." << std::endl;
+    cout << "Tiempo total para atender clientes: " << execution_time.count() << " minutos." << std::endl;
 
     return 0;
 }
